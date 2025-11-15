@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -46,4 +47,108 @@
     <button type="submit">Logout</button>
   </form>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="ja">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マイページ</title>
+  <link rel="stylesheet" href="{% static 'comparison/user_mypage_style/mypage_style.css' %}">
+
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="username">Welcome, {{ request.user.username }}!</h1>
+
+    <!-- タグ一覧 -->
+    <h2 class="your_tag collapsible">あなたのタグ一覧</h2>
+    <div class="tag-legend content-section">
+      <ul>
+        {% for tag in tags %}
+        <li id="tag-{{ tag.id }}">
+          <strong>{{ tag.role }}:</strong> {{ tag.name }}
+          <div class="works">
+            適用作品：
+            {% for work in tag.works.all %}
+            {% if work.comparison_page and work.id_for_anchor %}
+            <a href="{% url 'comparison:comparison_page' page=work.comparison_page %}#{{ work.id_for_anchor }}">
+              {{ work.title }}
+            </a>
+            {% else %}
+            <span>{{ work.title }}</span>
+            {% endif %}
+            {% if not forloop.last %}, {% endif %}
+            {% empty %}
+            <span>該当作品なし</span>
+            {% endfor %}
+          </div>
+          {% if tag.created_by == request.user %}
+          <div class="tag-actions">
+            <a href="{% url 'comparison:edit_tag' tag.id %}">編集</a>
+            <form method="post" action="{% url 'comparison:delete_tag' tag.id %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit"
+                onclick="return confirm('このタグを削除してもよいですか？\n\n注意：このタグを使用している全ての作品から削除されます。');">削除</button>
+            </form>
+          </div>
+          {% endif %}
+        </li>
+        {% empty %}
+        <li>タグはまだ登録されていません。</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- お気に入り一覧 -->
+    <h2 class="your_favorites collapsible">お気に入り作品一覧</h2>
+    <div class="favorites-section content-section">
+      <ul>
+        {% for f in favorites %}
+        <li>
+          {% if f.work and f.work.id %}
+          <a href="{% url 'comparison:work_detail' f.work.id %}">{{ f.work.title }}</a>
+          {% else %}
+          <span class="missing-work">（作品情報がありません）</span>
+          {% endif %}
+        </li>
+        {% empty %}
+        <li>お気に入りはありません</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- アカウント操作 -->
+    <div class="account-actions">
+      <a href="{% url 'comparison:index' %}">トップページに戻る</a>
+      <hr>
+      <form method="post" action="{% url 'comparison:delete_account' %}"
+        onsubmit="return confirm('本当にアカウントを削除しますか？この操作は元に戻せません。');">
+        {% csrf_token %}
+        <button type="submit" class="danger-button">アカウント削除</button>
+      </form>
+      <hr>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 開閉用スクリプト -->
+  <script>
+    document.querySelectorAll(".collapsible").forEach(header => {
+      header.addEventListener("click", () => {
+        header.classList.toggle("active");
+        const section = header.nextElementSibling;
+        section.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+
+>>>>>>> 02eda6b (2025_1115_mypage_custom)
 </html>

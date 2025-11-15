@@ -14,6 +14,16 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+
+    <!-- デバッグ情報 -->
+    <!-- <p>DEBUG user: {{ user.username }} / is_authenticated: {{ user.is_authenticated }}</p>
+    <p>DEBUG works_count: {{ works|length }}</p>
+    <p>DEBUG favorite_ids: {{ favorite_ids }}</p> -->
+
+
+>>>>>>> 02eda6b (2025_1115_mypage_custom)
     <!-- 元のタグ一覧ブロック群（非表示にしておく） -->
     <div id="all-tags" style="display:none">
         <input id="search-box" placeholder="作品名で絞り込み…" type="text" />
@@ -24455,6 +24465,7 @@
     <!-- ここに showTagsFor／showTagResults の内容をレンダーする -->
     <div id="tag-container"></div>
 
+<<<<<<< HEAD
 {% for work in works %}
   <div id="{{ work.id }}">
     <h3>{{ work.title }}</h3>
@@ -24465,6 +24476,43 @@
     </ul>
   </div>
 {% endfor %}
+=======
+
+    <!-- <hr>
+
+
+
+        <div id="favorite-insert"></div> -->
+        <!-- <script>
+        (function(){
+            // クエリパラメータを読み取る
+            const params = new URLSearchParams(location.search);
+            const sourceExternal = params.get('source_external_id') || params.get('target_id');
+            if (!sourceExternal) return;
+
+            // 1) external_id から DB 上の work.id を取得する
+            fetch(`/comparison/api/work/${encodeURIComponent(sourceExternal)}/info/`)
+                .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
+                .then(info => {
+                    const workId = info.id;
+                    // 2) その work.id に対応するポップアップ HTML を取得する
+                    return fetch(`/comparison/popup/tags/${workId}/?target_id=${encodeURIComponent(sourceExternal)}`);
+                })
+                .then(r => r.ok ? r.text() : Promise.reject(r.statusText))
+                .then(html => {
+                    const container = document.getElementById('favorite-insert');
+                    if (container) container.innerHTML = html;
+                })
+                .catch(err => {
+                    console.warn('お気に入りポップアップの読み込みに失敗しました:', err);
+                });
+        })();
+        </script> -->
+        
+
+
+
+>>>>>>> 02eda6b (2025_1115_mypage_custom)
     <script src="{% static 'comparison/tags_script/tag_window_logic.js' %}"></script>
 </body>
 

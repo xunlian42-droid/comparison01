@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -13,4 +14,25 @@
   <button type="submit">Login</button>
 </form>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="ja">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログインページ</title>
+    <link rel="stylesheet" href="{% static 'comparison/user_mypage_style/login_style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>ログイン</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+>>>>>>> 02eda6b (2025_1115_mypage_custom)
 </html>

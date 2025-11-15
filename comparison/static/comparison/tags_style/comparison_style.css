@@ -148,4 +148,25 @@ a.title-link:hover {
   0%   { background-color: yellow; }
   50%  { background-color: gold; }
   100% { background-color: transparent; }
+<<<<<<< HEAD
+=======
+}
+
+.fav-cell {
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.fav-cell button {
+  color: #0800ff;
+  background-color: #eee;
+  border: 1px solid #eee;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.fav-cell button:hover {
+  background-color: #00c3ff;
+>>>>>>> 02eda6b (2025_1115_mypage_custom)
 }

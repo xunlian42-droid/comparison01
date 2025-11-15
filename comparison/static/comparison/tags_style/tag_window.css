@@ -45,4 +45,22 @@ ul {
 input#search-box {
     width: 100%;
     padding: 0.5rem;
+<<<<<<< HEAD
 }
+=======
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: gold;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5em;
+}
+
+.favorite-button:hover {
+  transform: scale(1.2);
+}
+>>>>>>> 02eda6b (2025_1115_mypage_custom)

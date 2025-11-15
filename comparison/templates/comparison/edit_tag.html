@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h3>タグ「{{ tag.name }}」に紐づく作品</h3>
 <ul>
   {% for work in works %}
@@ -20,3 +21,54 @@
   <button type="submit">保存</button>
   <a href="{% url 'comparison:my_tags' %}">キャンセル</a>
 </form>
+=======
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>タグ編集</title>
+  <link rel="stylesheet" href="{% static 'comparison/user_mypage_style/edit_tag_style.css' %}">
+</head>
+
+<body>
+  <div class="container">
+    <h3>タグ「{{ tag.role }}:{{ tag.name }}」に紐づく作品</h3>
+
+    <!-- デバッグ情報 -->
+    <div class="debug-info" style="display:none;">
+      <p>タグID: {{ debug_info.tag_id }}</p>
+      <p>作品数: {{ debug_info.work_count }}</p>
+    </div>
+
+    <ul>
+      {% for work in works %}
+      <li>
+        {{ work.title }} (ID: {{ work.id }})
+        <form method="post" action="{% url 'comparison:edit_tag' tag.id %}" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="remove_work_id" value="{{ work.id }}">
+          <button type="submit" class="danger-button">この作品をタグから外す</button>
+        </form>
+      </li>
+      {% empty %}
+      <li>このタグには作品が紐づいていません。</li>
+      {% endfor %}
+    </ul>
+
+    <form method="post" action="{% url 'comparison:edit_tag' tag.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">保存</button>
+      <a href="{% url 'comparison:my_tags' %}">キャンセル</a>
+    </form>
+
+    <div class="back-links">
+      <a href="{% url 'comparison:mypage' %}">マイページに戻る</a>
+    </div>
+  </div>
+</body>
+
+</html>
+>>>>>>> 02eda6b (2025_1115_mypage_custom)
